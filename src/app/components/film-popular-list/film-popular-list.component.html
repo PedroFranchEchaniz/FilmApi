@@ -1,5 +1,20 @@
 <h1>Popular Films</h1>
 <div class="list-group list-group-horizontal position-relative overflow-auto w-100">
-    <app-film-item *ngFor="let f of filmList" [film]="f"
-        class="list-group-item"></app-film-item>
+    <app-film-item *ngFor="let f of filmList" [film]="f" class="list-group-item"
+        (filmClicked)="open($event, filmModal)"></app-film-item>
 </div>
+
+<ng-template #filmModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{filmDetail.title}}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <p>{{filmDetail.overview}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
